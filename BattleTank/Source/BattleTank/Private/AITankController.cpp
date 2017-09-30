@@ -20,6 +20,12 @@ ATank * AAITankController::GetPlayerTank() const
 	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
+void AAITankController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+}
+
 ATank* AAITankController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());

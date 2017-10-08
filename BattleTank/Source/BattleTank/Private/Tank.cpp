@@ -23,7 +23,6 @@ void ATank::BeginPlay()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ATank::AimAt(const FVector & HitLocation) const
@@ -39,6 +38,11 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+void ATank::FireMainWeapon() const
+{
+	UE_LOG(LogTemp, Warning, TEXT("Firing main weapon"));
 }
 
 

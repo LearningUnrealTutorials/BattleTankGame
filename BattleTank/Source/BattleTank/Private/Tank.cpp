@@ -3,6 +3,9 @@
 #include "Tank.h"
 #include "TankAimingComponent.h"
 #include "UObjectGlobals.h"
+#include "Engine/World.h"
+#include "TankBarrel.h"
+#include "MainWeaponProjectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -25,25 +28,31 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ATank::AimAt(const FVector & HitLocation) const
+void ATank::AimAt(const FVector HitLocation) const
 {
 	TankAimingComponent->AimAt(HitLocation);
 }
 
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
+	Barrel = BarrelToSet;
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
 
-void ATank::SetTurretReference(UTankTurret * TurretToSet)
+void ATank::SetTurretReference(UTankTurret *TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
 void ATank::FireMainWeapon() const
 {
+	if (!Barrel) { return; }
+	//Fire main weapon by spawning projectile at the end of the barrel
 	UE_LOG(LogTemp, Warning, TEXT("Firing main weapon"));
+	AMainWeaponProjectile *clone = GetWorld()->SpawnActor<AMainWeaponProjectile>
+		(
+			ProjectileBlueprint, 
+			Barrel->GetSocketLocation(FName("ProjectileSpawnLocation")),
+			Barrel->GetSocketRotation(FName("ProjectileSpawnLocation"))
+		);
 }
-
-
-

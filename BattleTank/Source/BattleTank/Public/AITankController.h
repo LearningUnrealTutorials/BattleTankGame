@@ -1,15 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
-#include "Tank.h"
-#include "Engine/World.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "AITankController.generated.h"
 
+
+//Forward declaration
+class ATank;
+
 /**
- * 
+ * Handles input from AI
  */
 UCLASS()
 class BATTLETANK_API AAITankController : public AAIController

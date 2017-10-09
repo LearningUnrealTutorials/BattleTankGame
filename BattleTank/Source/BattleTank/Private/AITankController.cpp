@@ -3,7 +3,6 @@
 #include "Tank.h"
 #include "Engine/World.h"
 
-
 void AAITankController::BeginPlay()
 {
 	Super::BeginPlay();

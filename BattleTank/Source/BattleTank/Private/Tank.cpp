@@ -48,11 +48,11 @@ void ATank::FireMainWeapon() const
 {
 	if (!Barrel) { return; }
 	//Fire main weapon by spawning projectile at the end of the barrel
-	UE_LOG(LogTemp, Warning, TEXT("Firing main weapon"));
-	AMainWeaponProjectile *clone = GetWorld()->SpawnActor<AMainWeaponProjectile>
+	AMainWeaponProjectile *ProjectileClone = GetWorld()->SpawnActor<AMainWeaponProjectile>
 		(
 			ProjectileBlueprint, 
 			Barrel->GetSocketLocation(FName("ProjectileSpawnLocation")),
 			Barrel->GetSocketRotation(FName("ProjectileSpawnLocation"))
 		);
+	ProjectileClone->LaunchProjectile(LaunchVelocity);
 }

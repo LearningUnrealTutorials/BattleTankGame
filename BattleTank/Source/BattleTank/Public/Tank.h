@@ -19,6 +19,9 @@ class BATTLETANK_API ATank : public APawn
 private:
 	// Sets default values for this pawn's properties
 	ATank();
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float ReloadTimeInSeconds = 3;
+	double LastFireTime = 0;
 
 	//Local barrel referrence
 	UTankBarrel *Barrel = nullptr;
@@ -38,7 +41,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret *TurretToSet);
 	UFUNCTION(BlueprintCallable, Category = Input)
-		void FireMainWeapon() const;
+		void FireMainWeapon();
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchVelocity = 10000.0f;
 	UPROPERTY(EditAnywhere, Category = Setup)

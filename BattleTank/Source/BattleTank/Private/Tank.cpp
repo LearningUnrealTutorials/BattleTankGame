@@ -44,15 +44,19 @@ void ATank::SetTurretReference(UTankTurret *TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
-void ATank::FireMainWeapon() const
+void ATank::FireMainWeapon()
 {
-	if (!Barrel) { return; }
-	//Fire main weapon by spawning projectile at the end of the barrel
-	AMainWeaponProjectile *ProjectileClone = GetWorld()->SpawnActor<AMainWeaponProjectile>
-		(
-			ProjectileBlueprint, 
-			Barrel->GetSocketLocation(FName("ProjectileSpawnLocation")),
-			Barrel->GetSocketRotation(FName("ProjectileSpawnLocation"))
-		);
-	ProjectileClone->LaunchProjectile(LaunchVelocity);
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (Barrel && isReloaded)
+	{
+		//Fire main weapon by spawning projectile at the end of the barrel
+		AMainWeaponProjectile *ProjectileClone = GetWorld()->SpawnActor<AMainWeaponProjectile>
+			(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("ProjectileSpawnLocation")),
+				Barrel->GetSocketRotation(FName("ProjectileSpawnLocation"))
+				);
+		ProjectileClone->LaunchProjectile(LaunchVelocity);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }

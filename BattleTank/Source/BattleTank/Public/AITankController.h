@@ -19,6 +19,8 @@ class BATTLETANK_API AAITankController : public AAIController
 
 private:
 	void BeginPlay() override;
+	UPROPERTY(EditDefaultsOnly, Category = Naviagation)
+		float AcceptanceRadius = 50.0f;
 
 public:
 	// Called every frame

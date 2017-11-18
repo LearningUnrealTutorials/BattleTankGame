@@ -16,12 +16,12 @@ class BATTLETANK_API APlayerTankController : public APlayerController
 	GENERATED_BODY()
 protected:
 	void BeginPlay() override;
-
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		ATank* GetControlledTank() const;
 public: 
 	// Called every frame
 	void Tick(float DeltaTime) override;
 private:
-	ATank* GetControlledTank() const;
 	//Move tank barrel towards crosshair
 	void AimTowardsCrosshair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;

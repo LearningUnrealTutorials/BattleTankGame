@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
 
 #pragma once
 #include "CoreMinimal.h"
@@ -7,6 +7,8 @@
 
 //Forward declaration
 class ATank;
+class UTankAimingComponent;
+
 /**
  * Handlesp player input
  */
@@ -18,6 +20,8 @@ protected:
 	void BeginPlay() override;
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		ATank* GetControlledTank() const;
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+		void FoundAimingComponent(UTankAimingComponent* AimingComponentRef);
 public: 
 	// Called every frame
 	void Tick(float DeltaTime) override;

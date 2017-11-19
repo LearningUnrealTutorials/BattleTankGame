@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
 
 #pragma once
 
@@ -18,6 +18,6 @@ public:
 	void Rotate(float RelativeSpeed);
 	
 private:
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float MaxDegreesPerSecond = 20.0f;
 };

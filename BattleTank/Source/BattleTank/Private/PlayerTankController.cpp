@@ -2,6 +2,7 @@
 #include "PlayerTankController.h"
 #include "Tank.h"
 #include "Engine/World.h"
+#include "TankAimingComponent.h"
 
 ATank* APlayerTankController::GetControlledTank() const
 {
@@ -11,6 +12,9 @@ ATank* APlayerTankController::GetControlledTank() const
 void APlayerTankController::BeginPlay()
 {
 	Super::BeginPlay();
+	UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) return;
+	FoundAimingComponent(AimingComponent);
 }
 
 void APlayerTankController::Tick(float DeltaTime)

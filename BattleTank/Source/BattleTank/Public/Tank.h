@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
 
 #pragma once
 #include "CoreMinimal.h"
@@ -10,7 +10,6 @@ class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
 class AMainWeaponProjectile;
-class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -20,12 +19,12 @@ class BATTLETANK_API ATank : public APawn
 private:
 	// Sets default values for this pawn's properties
 	ATank();
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float ReloadTimeInSeconds = 3;
 	double LastFireTime = 0;
 
 	//Local barrel referrence
-	UTankBarrel *Barrel = nullptr;
+	UTankBarrel *Barrel = nullptr; //TODO Remove
 
 protected:
 	// Called when the game starts or when spawned
@@ -33,24 +32,14 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 		UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
-		UTankMovementComponent* TankMovementComponent = nullptr;
-	
-
 public:	
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	void AimAt(const FVector HitLocation) const;
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel *BarrelToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret *TurretToSet);
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 		void FireMainWeapon();
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditAnywhere, Category = "Firing")
 		float LaunchVelocity = 10000.0f;
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = "Setup")
 		TSubclassOf<AMainWeaponProjectile> ProjectileBlueprint;
 
 };

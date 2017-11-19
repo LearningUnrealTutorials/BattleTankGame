@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
 
 #pragma once
 #include "CoreMinimal.h"
@@ -19,7 +19,7 @@ class BATTLETANK_API AAITankController : public AAIController
 
 private:
 	void BeginPlay() override;
-	UPROPERTY(EditDefaultsOnly, Category = Naviagation)
+	UPROPERTY(EditDefaultsOnly, Category = "Naviagation")
 		float AcceptanceRadius = 50.0f;
 
 public:

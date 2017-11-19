@@ -6,9 +6,6 @@
 #include "AITankController.generated.h"
 
 
-//Forward declaration
-class ATank;
-
 /**
  * Handles input from AI
  */

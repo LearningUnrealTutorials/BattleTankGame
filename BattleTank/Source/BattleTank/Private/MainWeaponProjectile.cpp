@@ -24,7 +24,6 @@ void AMainWeaponProjectile::BeginPlay()
 void AMainWeaponProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AMainWeaponProjectile::LaunchProjectile(float Speed)

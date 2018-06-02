@@ -1,4 +1,4 @@
-// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
+// by Aleksander Naumenok
 
 #pragma once
 #include "CoreMinimal.h"

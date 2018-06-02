@@ -1,4 +1,4 @@
-// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
+// by Aleksander Naumenok
 
 #include "Tank.h"
 #include "UObjectGlobals.h"
@@ -14,5 +14,5 @@ ATank::ATank()
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
-	Super::BeginPlay(); //Starts blue print begin play
+	Super::BeginPlay(); //Starts blueprint begin play
 }

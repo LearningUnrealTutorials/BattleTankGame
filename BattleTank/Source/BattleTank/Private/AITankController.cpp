@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// by Aleksander Naumenok
+
 #include "AITankController.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
@@ -15,11 +16,10 @@ void AAITankController::Tick(float DeltaTime)
 	auto ControlledTank = GetPawn();
 
 
-	if(ensure(PlayerTank) && ensure(ControlledTank))
-	{
+	if (!ensure(PlayerTank && ControlledTank)) { return; }
+	
 		UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 		MoveToActor(PlayerTank, AcceptanceRadius);
 		AimingComponent->AimAt(PlayerTank->GetActorLocation());
 		AimingComponent->FireMainWeapon(); //TODO Not fire every time
-	}
 }

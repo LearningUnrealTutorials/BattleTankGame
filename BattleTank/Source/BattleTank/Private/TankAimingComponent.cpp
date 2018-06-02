@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// by Aleksander Naumenok
 
 #include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
@@ -87,7 +87,7 @@ void UTankAimingComponent::FireMainWeapon()
 	
 	if (FiringState != EFiringState::Reloading)
 	{
-		if (!ensure(Barrel)) { return; }
+		if (!ensure(Barrel && ProjectileBlueprint)) { return; }
 		//Fire main weapon by spawning projectile at the end of the barrel
 		AMainWeaponProjectile *ProjectileClone = GetWorld()->SpawnActor<AMainWeaponProjectile>
 			(

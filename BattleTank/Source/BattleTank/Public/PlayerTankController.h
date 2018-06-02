@@ -1,4 +1,4 @@
-// Written in 2017 by Aleksander Naumenok while following a tutorial on udemy.
+// by Aleksander Naumenok
 
 #pragma once
 #include "CoreMinimal.h"
@@ -17,6 +17,7 @@ class BATTLETANK_API APlayerTankController : public APlayerController
 	GENERATED_BODY()
 protected:
 	void BeginPlay() override;
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimingComponentRef);
 public: 

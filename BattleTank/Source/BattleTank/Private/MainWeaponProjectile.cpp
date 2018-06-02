@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// by Aleksander Naumenok
 
 #include "MainWeaponProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"

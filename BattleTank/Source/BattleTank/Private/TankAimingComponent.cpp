@@ -29,7 +29,8 @@ void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * T
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
+//Handle reloading and firing states
+void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	//Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
@@ -84,7 +85,6 @@ void UTankAimingComponent::AimAt(const FVector &LocationToAimAt)
 
 void UTankAimingComponent::FireMainWeapon()
 {
-	
 	if (FiringState != EFiringState::Reloading)
 	{
 		if (!ensure(Barrel && ProjectileBlueprint)) { return; }
@@ -101,6 +101,10 @@ void UTankAimingComponent::FireMainWeapon()
 	}
 }
 
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
+}
 
 void UTankAimingComponent::MoveBarrelTowards(FVector &AimDirection) const
 {
@@ -109,6 +113,16 @@ void UTankAimingComponent::MoveBarrelTowards(FVector &AimDirection) const
 
 void UTankAimingComponent::RotateTurretTowards(FVector &AimDirection) const
 {
-	Turret->Rotate((AimDirection.Rotation() - Barrel->GetForwardVector().Rotation()).Yaw);
+	FRotator DeltaRotator = AimDirection.Rotation() - Barrel->GetForwardVector().Rotation();
+	if (FMath::Abs(DeltaRotator.Yaw) < 180)
+	{
+		//Turret->Rotate((AimDirection.Rotation() - Barrel->GetForwardVector().Rotation()).Yaw);
+		Turret->Rotate(DeltaRotator.Yaw);
+	}
+	else
+	{
+		Turret->Rotate(-DeltaRotator.Yaw);
+	}
+
 }
 

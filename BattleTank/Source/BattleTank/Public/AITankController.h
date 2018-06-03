@@ -14,12 +14,13 @@ class BATTLETANK_API AAITankController : public AAIController
 {
 	GENERATED_BODY()
 
-private:
+private: //Functions
 	void BeginPlay() override;
-	UPROPERTY(EditDefaultsOnly, Category = "Naviagation")
-		float AcceptanceRadius = 50.0f;
 
-public:
-	// Called every frame
+public: //Functions
 	virtual void Tick(float DeltaTime) override;
+	
+protected: //variables
+	UPROPERTY(EditDefaultsOnly, Category = "Naviagation")
+		float AcceptanceRadius = 200.0f;
 };

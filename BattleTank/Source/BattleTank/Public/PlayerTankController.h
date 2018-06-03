@@ -27,6 +27,7 @@ private:
 	//Move tank barrel towards crosshair
 	UTankAimingComponent* m_AimingComponent;
 	void AimTowardsCrosshair();
+	bool SetupAimingComponent();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 	bool GetLookDirection(const FVector2D &ScreenLocation, FVector & OutLookDirection) const;
 	bool GetLookVectorHitLocation(const FVector& LookDirection, FVector& OutHitLocation) const;

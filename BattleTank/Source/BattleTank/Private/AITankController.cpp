@@ -21,5 +21,6 @@ void AAITankController::Tick(float DeltaTime)
 		UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 		MoveToActor(PlayerTank, AcceptanceRadius);
 		AimingComponent->AimAt(PlayerTank->GetActorLocation());
-		AimingComponent->FireMainWeapon(); //TODO Not fire every time
+		if(AimingComponent->GetFiringState() == EFiringState::Locked)
+			AimingComponent->FireMainWeapon();
 }

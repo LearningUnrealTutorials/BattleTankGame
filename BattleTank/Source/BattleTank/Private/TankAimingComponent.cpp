@@ -33,7 +33,12 @@ void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * T
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	//Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+
+	if (m_AmmoCount <= 0)
+	{
+		FiringState = EFiringState::OutOfAmmo;
+	}
+	else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringState = EFiringState::Reloading;
 	}
@@ -85,7 +90,7 @@ void UTankAimingComponent::AimAt(const FVector &LocationToAimAt)
 
 void UTankAimingComponent::FireMainWeapon()
 {
-	if (FiringState != EFiringState::Reloading)
+	if (FiringState == EFiringState::Locked || FiringState == EFiringState::Aiming)
 	{
 		if (!ensure(Barrel && ProjectileBlueprint)) { return; }
 		//Fire main weapon by spawning projectile at the end of the barrel
@@ -98,12 +103,18 @@ void UTankAimingComponent::FireMainWeapon()
 		ProjectileClone->LaunchProjectile(LaunchVelocity);
 		FiringState = EFiringState::Reloading;
 		LastFireTime = FPlatformTime::Seconds();
+		m_AmmoCount--;
 	}
 }
 
 EFiringState UTankAimingComponent::GetFiringState() const
 {
 	return FiringState;
+}
+
+int UTankAimingComponent::GetAmmoCount() const
+{
+	return m_AmmoCount;
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector &AimDirection) const

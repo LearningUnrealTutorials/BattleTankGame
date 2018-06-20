@@ -34,7 +34,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	//Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (m_AmmoCount <= 0)
+	if (RoundsLeft <= 0)
 	{
 		FiringState = EFiringState::OutOfAmmo;
 	}
@@ -103,7 +103,7 @@ void UTankAimingComponent::FireMainWeapon()
 		ProjectileClone->LaunchProjectile(LaunchVelocity);
 		FiringState = EFiringState::Reloading;
 		LastFireTime = FPlatformTime::Seconds();
-		m_AmmoCount--;
+		RoundsLeft--;
 	}
 }
 
@@ -112,9 +112,9 @@ EFiringState UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
-int UTankAimingComponent::GetAmmoCount() const
+int32 UTankAimingComponent::GetAmmoCount() const
 {
-	return m_AmmoCount;
+	return RoundsLeft;
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector &AimDirection) const

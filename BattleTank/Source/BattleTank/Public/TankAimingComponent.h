@@ -31,10 +31,12 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 
 public: //Variables
-	UPROPERTY(EditAnywhere, Category = "Firing")
-		float LaunchVelocity = 10000.0f;
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		TSubclassOf<AMainWeaponProjectile> ProjectileBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float ReloadTimeInSeconds = 3;
+	UPROPERTY(EditAnywhere, Category = "Firing")
+		float LaunchVelocity = 10000.0f;
 
 public: //Functions
 	void AimAt(const FVector &LocationToAimAt);
@@ -45,20 +47,21 @@ public: //Functions
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 		EFiringState GetFiringState() const;
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetAmmoCount() const;
+	int32 GetAmmoCount() const;
 
 protected: //Variables
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EFiringState FiringState = EFiringState::Reloading;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		int32 RoundsLeft = 3;
 
 private: //Variables
 	UTankBarrel *Barrel = nullptr;
 	UTankTurret *Turret = nullptr;
 	FVector m_AimDirection;
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float ReloadTimeInSeconds = 3;
+
 	double LastFireTime = 0;
-	int m_AmmoCount = 3;
+
 
 private: //Functions
 	void MoveBarrelTowards(FVector &AimDirection) const;

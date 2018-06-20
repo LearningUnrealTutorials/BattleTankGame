@@ -7,25 +7,30 @@
 #include "MainWeaponProjectile.generated.h"
 
 class UProjectileMovementComponent;
+class UParticleSystemComponent;
+class UStaticMeshComponent;
 
 UCLASS()
 class BATTLETANK_API AMainWeaponProjectile : public AActor
 {
 	GENERATED_BODY()
 	
-private:
+private: //Variables
 	UProjectileMovementComponent *ProjectileMovementComponent = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UStaticMeshComponent *CollisionMesh = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UParticleSystemComponent *LaunchBlast = nullptr;
 
-public:	
-	// Sets default values for this actor's properties
-	AMainWeaponProjectile();
+public:	//Variables
 
-protected:
+protected: //Functions
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public: //Functions
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void LaunchProjectile(float Speed);
+	AMainWeaponProjectile(); // Sets default values for this actor's properties
 };

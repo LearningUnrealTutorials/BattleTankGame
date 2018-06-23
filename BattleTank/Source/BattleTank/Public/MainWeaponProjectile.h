@@ -7,8 +7,7 @@
 #include "MainWeaponProjectile.generated.h"
 
 class UProjectileMovementComponent;
-class UParticleSystemComponent;
-class UStaticMeshComponent;
+class URadialForceComponent;
 
 UCLASS()
 class BATTLETANK_API AMainWeaponProjectile : public AActor
@@ -16,11 +15,26 @@ class BATTLETANK_API AMainWeaponProjectile : public AActor
 	GENERATED_BODY()
 	
 private: //Variables
-	UProjectileMovementComponent *ProjectileMovementComponent = nullptr;
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+
+	void OnLifeTimerExpire();
+	UFUNCTION()
+		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float DestroyDelay = 3.f;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UStaticMeshComponent *CollisionMesh = nullptr;
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UParticleSystemComponent *LaunchBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UParticleSystemComponent *ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		URadialForceComponent *ExplosionForce = nullptr;
+
+	UProjectileMovementComponent *ProjectileMovementComponent = nullptr;
 
 public:	//Variables
 
@@ -30,7 +44,6 @@ protected: //Functions
 
 public: //Functions
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 	void LaunchProjectile(float Speed);
 	AMainWeaponProjectile(); // Sets default values for this actor's properties
 };

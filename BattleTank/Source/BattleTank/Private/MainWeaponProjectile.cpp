@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AMainWeaponProjectile::AMainWeaponProjectile()
@@ -33,6 +34,7 @@ AMainWeaponProjectile::AMainWeaponProjectile()
 	ProjectileMovementComponent->bAutoActivate = false;
 }
 
+
 // Called when the game starts or when spawned
 void AMainWeaponProjectile::BeginPlay()
 {
@@ -49,7 +51,7 @@ void AMainWeaponProjectile::OnHit(UPrimitiveComponent *HitComponent, AActor *Oth
 
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
-
+	UGameplayStatics::ApplyRadialDamage(this, ProjectileDamage, GetActorLocation(), ExplosionForce->Radius, UDamageType::StaticClass(), TArray<AActor*>());
 	FTimerHandle Timer;
 	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AMainWeaponProjectile::OnLifeTimerExpire, DestroyDelay, false);
 }

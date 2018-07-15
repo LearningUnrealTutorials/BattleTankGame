@@ -16,6 +16,9 @@ class BATTLETANK_API AAITankController : public AAIController
 
 private: //Functions
 	void BeginPlay() override;
+	virtual void SetPawn(APawn* InPawn) override;
+	UFUNCTION()
+		void OnPossessedTankDeath();
 
 public: //Functions
 	virtual void Tick(float DeltaTime) override;

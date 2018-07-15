@@ -2,6 +2,28 @@
 #include "PlayerTankController.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
+
+void APlayerTankController::SetPawn(APawn * InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn != nullptr)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank))
+		{
+			return;
+		}
+
+		//Subscrie to tank death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &APlayerTankController::OnPossessedTankDeath);
+	}
+}
+
+void APlayerTankController::OnPossessedTankDeath()
+{
+	StartSpectatingOnly();
+}
 
 void APlayerTankController::BeginPlay()
 {

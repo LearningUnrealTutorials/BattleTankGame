@@ -31,6 +31,9 @@ private:
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 	bool GetLookDirection(const FVector2D &ScreenLocation, FVector & OutLookDirection) const;
 	bool GetLookVectorHitLocation(const FVector& LookDirection, FVector& OutHitLocation) const;
+	virtual void SetPawn(APawn* InPawn) override;
+	UFUNCTION()
+		void OnPossessedTankDeath();
 	UPROPERTY(EditDefaultsOnly)
 		float CrosshairXLocation = 0.5f;
 	UPROPERTY(EditDefaultsOnly)

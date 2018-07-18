@@ -15,9 +15,12 @@ class BATTLETANK_API ATank : public APawn
 private:
 	// Sets default values for this pawn's properties
 	ATank();
+	UPROPERTY(EditAnywhere, Category = "Status")
+		int32 StartingHealth = 100;
+	UPROPERTY(VisibleAnywhere, Category = "Status")
+		int32 CurrentHealth = 0;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
@@ -26,10 +29,4 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Health")
 		float GetHealthPercent();
 	FTankDelegate OnDeath;
-
-private:
-	UPROPERTY(EditAnywhere, Category = "Status")
-		int32 StartingHealth = 100;
-	UPROPERTY(VisibleAnywhere, Category = "Status")
-		int32 CurrentHealth = 0;
 };

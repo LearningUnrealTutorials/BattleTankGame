@@ -18,6 +18,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::BeginPlay()
 {
+	Super::BeginPlay();
 	///Begin game by reloading main weapon
 	LastFireTime = FPlatformTime::Seconds();
 	FiringState = EFiringState::Reloading;
@@ -32,7 +33,7 @@ void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * T
 //Handle reloading and firing states
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
-	//Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	if (RoundsLeft <= 0)
 	{

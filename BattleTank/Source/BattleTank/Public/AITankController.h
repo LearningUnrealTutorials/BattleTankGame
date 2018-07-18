@@ -15,7 +15,7 @@ class BATTLETANK_API AAITankController : public AAIController
 	GENERATED_BODY()
 
 private: //Functions
-	void BeginPlay() override;
+	virtual void BeginPlay() override;
 	virtual void SetPawn(APawn* InPawn) override;
 	UFUNCTION()
 		void OnPossessedTankDeath();

@@ -16,7 +16,7 @@ void AAITankController::SetPawn(APawn * InPawn)
 	if (InPawn != nullptr)
 	{
 		auto PossessedTank = Cast<ATank>(InPawn);
-		if(!ensure(PossessedTank))
+		if(!PossessedTank)
 		{ return; }
 
 		//Subscrie to tank death event

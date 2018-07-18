@@ -16,7 +16,7 @@ class BATTLETANK_API APlayerTankController : public APlayerController
 {
 	GENERATED_BODY()
 protected:
-	void BeginPlay() override;
+	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimingComponentRef);

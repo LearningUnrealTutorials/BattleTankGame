@@ -37,8 +37,6 @@ public: //Variables
 		float ReloadTimeInSeconds = 3;
 	UPROPERTY(EditAnywhere, Category = "Firing")
 		float LaunchVelocity = 10000.0f;
-
-public: //Functions
 	void AimAt(const FVector &LocationToAimAt);
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
@@ -47,7 +45,7 @@ public: //Functions
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 		EFiringState GetFiringState() const;
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int32 GetAmmoCount() const;
+		int32 GetAmmoCount() const;
 
 protected: //Variables
 	UPROPERTY(BlueprintReadOnly, Category = "State")
@@ -55,20 +53,17 @@ protected: //Variables
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		int32 RoundsLeft = 3;
 
-private: //Variables
-	UTankBarrel *Barrel = nullptr;
-	UTankTurret *Turret = nullptr;
-	FVector m_AimDirection;
-
-	double LastFireTime = 0;
-
-
 private: //Functions
 	void MoveBarrelTowards(FVector &AimDirection) const;
 	void RotateTurretTowards(FVector &AimDirection) const;
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
-	void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	virtual void BeginPlay() override;
 	bool IsBarrelMoving() const;
+	UTankBarrel *Barrel = nullptr;
+	UTankTurret *Turret = nullptr;
+	FVector m_AimDirection;
+
+	double LastFireTime = 0;
 };
